@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import WeeklyAvailability from "../../utils/WeeklyAvailability";
 
 const Teacher = ({ teacher }) => {
-  const { name, subject, image, available_days, fees } = teacher;
+  const { name, subject, image, available_days, fees, id } = teacher;
   const allDays = [
     { short: "Sat", full: "Saturday" },
     { short: "Sun", full: "Sunday" },
@@ -11,6 +12,12 @@ const Teacher = ({ teacher }) => {
     { short: "Thu", full: "Thursday" },
     { short: "Fri", full: "Friday" },
   ];
+
+  const handleDetailClick = (id) => {
+    console.log(id);
+    // Navigate to the detail page for the teacher
+    window.location.href = `/teacher/${id}`;
+  };
   return (
     <div className="max-w-xs m-4 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
       <img
@@ -30,12 +37,14 @@ const Teacher = ({ teacher }) => {
           ))}
         </div> */}
         <WeeklyAvailability availableDays={teacher.available_days} />
-        <button
-          type="button"
-          className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-violet-600 dark:text-gray-50"
-        >
-          Read more
-        </button>
+        <div className="text-center mt-4">
+          <Link
+            to={`/teacher/${teacher.id}`}
+            className="inline-block px-4 py-2 btn text-sm font-semibold text-white bg-blue-600 rounded hover:bg-blue-700"
+          >
+            Read More
+          </Link>
+        </div>
       </div>
     </div>
   );
