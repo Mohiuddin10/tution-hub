@@ -12,10 +12,15 @@ const Home = () => {
   return (
     <div>
       <h2>Teachers found: {teachers.length}</h2>
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {teachers.map((teacher) => (
-          <Teacher key={teacher.id} teacher={teacher}></Teacher>
-        ))}
+      <div className="flex gap-2">
+        <div className="w-3/4 border">
+          {teachers.map((teacher) => (
+            <Teacher key={teacher.id} teacher={teacher}></Teacher>
+          ))}
+        </div>
+        <div className="w-1/4 border">
+          <h2>Book tution shedual</h2>
+        </div>
       </div>
     </div>
   );

@@ -19,11 +19,11 @@ const Teacher = ({ teacher }) => {
     window.location.href = `/teacher/${id}`;
   };
   return (
-    <div className="max-w-xs m-4 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+    <div className="max-w-full m-4 p-2 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
       <img
         src={image}
         alt="Teacher Image"
-        className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500"
+        className="object-cover w-1/4 object-center mx-auto rounded-full shadow-2xl h-72 dark:bg-gray-500"
       />
       <div className="flex flex-col justify-between p-6 space-y-8">
         <div className="space-y-2">
