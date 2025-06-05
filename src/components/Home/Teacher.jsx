@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import WeeklyAvailability from "../../utils/WeeklyAvailability";
-import { LuHeart } from "react-icons/lu";
+import { AiTwotoneLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
+import { useState } from "react";
 
 const Teacher = ({ teacher }) => {
+  const [liked, setLiked] = useState([]);
   const { name, subject, image, available_days, fees, id } = teacher;
   const allDays = [
     { short: "Sat", full: "Saturday" },
@@ -18,6 +21,15 @@ const Teacher = ({ teacher }) => {
     console.log(id);
     // Navigate to the detail page for the teacher
     window.location.href = `/teacher/${id}`;
+  };
+
+  const handleLikeClick = (id) => {
+    console.log(`Liked teacher with ID: ${id}`);
+    if (liked.includes(id)) {
+      setLiked(liked.filter((likedId) => likedId !== id));
+    } else {
+      setLiked([...liked, id]);
+    }
   };
   return (
     <div className="max-w-full m-4 p-2 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
@@ -35,8 +47,15 @@ const Teacher = ({ teacher }) => {
       <div className="flex flex-col justify-between p-6 space-y-8">
         <div className="flex align-middle justify-between">
           <h2 className="text-xl font-bold">Fees: ৳ {fees}</h2>
-          <button datatheme="light" className="btn">
-            <LuHeart />
+          <button
+            onClick={() => handleLikeClick(id)}
+            className="cursor-pointer p-2 rounded-full hover:bg-gray-200"
+          >
+            {liked.includes(id) ? (
+              <AiFillLike className="text-2xl text-red-500" />
+            ) : (
+              <AiTwotoneLike className="text-2xl" />
+            )}
           </button>
         </div>
 
