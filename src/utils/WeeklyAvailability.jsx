@@ -12,7 +12,7 @@ const allDays = [
 
 const WeeklyAvailability = ({ availableDays }) => {
   return (
-    <div className="grid grid-cols-3 gap-1 text-center text-sm mt-3">
+    <div className="grid grid-cols-3 gap-1 text-center text-sm mt-3 w-4/5">
       {allDays.map((day, index) => {
         const isAvailable = availableDays.includes(day.full);
         return (

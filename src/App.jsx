@@ -9,11 +9,11 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto p-4">
       <Nav />
       <Outlet />
       <h2>Footer</h2>
-    </>
+    </div>
   );
 }
 
