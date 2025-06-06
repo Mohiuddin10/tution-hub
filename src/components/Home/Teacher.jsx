@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import WeeklyAvailability from "../../utils/WeeklyAvailability";
 import { AiTwotoneLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { checkLocalStorage, storeLocalStorage } from "../../utils/storeData";
 
 const Teacher = ({ teacher }) => {
   const [liked, setLiked] = useState([]);
-  const { name, subject, image, available_days, fees, id } = teacher;
+
+  useEffect(() => {
+    const checkLiked = checkLocalStorage();
+    setLiked(checkLiked);
+  }, []);
+  const { name, subject, image, fees, id } = teacher;
   const allDays = [
     { short: "Sat", full: "Saturday" },
     { short: "Sun", full: "Sunday" },
@@ -25,11 +31,14 @@ const Teacher = ({ teacher }) => {
 
   const handleLikeClick = (id) => {
     console.log(`Liked teacher with ID: ${id}`);
-    if (liked.includes(id)) {
-      setLiked(liked.filter((likedId) => likedId !== id));
-    } else {
-      setLiked([...liked, id]);
-    }
+    storeLocalStorage(id);
+    setLiked(checkLocalStorage());
+
+    // if (liked.includes(id)) {
+    //   setLiked(liked.filter((likedId) => likedId !== id));
+    // } else {
+    //   setLiked([...liked, id]);
+    // }
   };
   return (
     <div className="max-w-full m-4 p-2 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
