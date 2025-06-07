@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Teacher from "./Teacher";
+import AddShedual from "../addShedual/AddShedual";
 
 const Home = () => {
   const [teachers, setTeachers] = useState([]);
+  const [shedual, setShedual] = useState([]);
   useEffect(() => {
     fetch("/blogs.json")
       .then((res) => res.json())
@@ -15,11 +17,15 @@ const Home = () => {
       <div className="flex gap-2">
         <div className="w-3/4 border">
           {teachers.map((teacher) => (
-            <Teacher key={teacher.id} teacher={teacher}></Teacher>
+            <Teacher
+              key={teacher.id}
+              setShedual={setShedual}
+              teacher={teacher}
+            ></Teacher>
           ))}
         </div>
         <div className="w-1/4 border">
-          <h2>Book tution shedual</h2>
+          <AddShedual shedual={shedual} />
         </div>
       </div>
     </div>

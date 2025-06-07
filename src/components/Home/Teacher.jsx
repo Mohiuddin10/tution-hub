@@ -5,14 +5,14 @@ import { AiFillLike } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { checkLocalStorage, storeLocalStorage } from "../../utils/storeData";
 
-const Teacher = ({ teacher }) => {
+const Teacher = ({ teacher, setShedual }) => {
   const [liked, setLiked] = useState([]);
 
   useEffect(() => {
     const checkLiked = checkLocalStorage();
     setLiked(checkLiked);
   }, []);
-  const { name, subject, image, fees, id } = teacher;
+  const { name, subject, image, fees, id, college } = teacher;
   const allDays = [
     { short: "Sat", full: "Saturday" },
     { short: "Sun", full: "Sunday" },
@@ -40,6 +40,15 @@ const Teacher = ({ teacher }) => {
     //   setLiked([...liked, id]);
     // }
   };
+
+  const handleShedual = (id) => {
+    console.log(`Scheduling for teacher with ID: ${id}`);
+    setShedual(id);
+
+    // Here you can handle the scheduling logic, e.g., updating state or navigating
+    // For now, we'll just log the ID
+    // You might want to redirect to a scheduling page or show a modal
+  };
   return (
     <div className="max-w-full m-4 p-2 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
       <div className="flex gap-4">
@@ -51,6 +60,7 @@ const Teacher = ({ teacher }) => {
         <div className="">
           <h2 className="text-2xl font-semibold tracking-wide">{name}</h2>
           <p className="dark:text-gray-800">{subject} Teacher</p>
+          <h2>College: {college}</h2>
         </div>
       </div>
       <div className="flex flex-col justify-between p-6 space-y-8">
@@ -71,12 +81,12 @@ const Teacher = ({ teacher }) => {
         <div className="text-center flex mt-4">
           <WeeklyAvailability availableDays={teacher.available_days} />
           <div className="flex flex-col gap-4">
-            <Link
-              to={`/teacher/${teacher.id}`}
+            <button
+              onClick={() => handleShedual(id)}
               className="inline-block px-4 py-2 btn text-sm font-semibold text-white bg-blue-600 rounded hover:bg-blue-700"
             >
               Book Tution
-            </Link>
+            </button>
             <Link
               to={`/teacher/${teacher.id}`}
               className="inline-block px-4 py-2 btn text-sm font-semibold text-white bg-green-600 rounded hover:bg-green-700"
