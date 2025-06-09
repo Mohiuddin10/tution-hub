@@ -5,6 +5,7 @@ import AddShedual from "../addShedual/AddShedual";
 const Home = () => {
   const [teachers, setTeachers] = useState([]);
   const [shedual, setShedual] = useState([]);
+  console.log(shedual);
   useEffect(() => {
     fetch("/blogs.json")
       .then((res) => res.json())

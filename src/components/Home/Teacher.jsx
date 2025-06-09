@@ -12,7 +12,7 @@ const Teacher = ({ teacher, setShedual }) => {
     const checkLiked = checkLocalStorage();
     setLiked(checkLiked);
   }, []);
-  const { name, subject, image, fees, id, college } = teacher;
+  const { name, subject, image, fees, id, college, available_days } = teacher;
   const allDays = [
     { short: "Sat", full: "Saturday" },
     { short: "Sun", full: "Sunday" },
@@ -41,9 +41,8 @@ const Teacher = ({ teacher, setShedual }) => {
     // }
   };
 
-  const handleShedual = (id) => {
-    console.log(`Scheduling for teacher with ID: ${id}`);
-    setShedual(id);
+  const handleShedual = (name, available_days, price) => {
+    setShedual({ name, available_days, price });
 
     // Here you can handle the scheduling logic, e.g., updating state or navigating
     // For now, we'll just log the ID
@@ -82,7 +81,7 @@ const Teacher = ({ teacher, setShedual }) => {
           <WeeklyAvailability availableDays={teacher.available_days} />
           <div className="flex flex-col gap-4">
             <button
-              onClick={() => handleShedual(id)}
+              onClick={() => handleShedual(name, available_days, fees)}
               className="inline-block px-4 py-2 btn text-sm font-semibold text-white bg-blue-600 rounded hover:bg-blue-700"
             >
               Book Tution
