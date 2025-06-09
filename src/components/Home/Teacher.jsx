@@ -4,8 +4,9 @@ import { AiTwotoneLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { checkLocalStorage, storeLocalStorage } from "../../utils/storeData";
+import { useMatchDays } from "../../utils/useMatchDays";
 
-const Teacher = ({ teacher, setShedual }) => {
+const Teacher = ({ teacher, setShedual, shedual }) => {
   const [liked, setLiked] = useState([]);
 
   useEffect(() => {
@@ -42,7 +43,9 @@ const Teacher = ({ teacher, setShedual }) => {
   };
 
   const handleShedual = (name, available_days, price) => {
-    setShedual({ name, available_days, price });
+    const matchDays = useMatchDays(shedual, available_days);
+    console.log(matchDays);
+    setShedual([...shedual, { name, available_days, price }]);
 
     // Here you can handle the scheduling logic, e.g., updating state or navigating
     // For now, we'll just log the ID

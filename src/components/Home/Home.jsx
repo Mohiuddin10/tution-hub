@@ -21,6 +21,7 @@ const Home = () => {
             <Teacher
               key={teacher.id}
               setShedual={setShedual}
+              shedual={shedual}
               teacher={teacher}
             ></Teacher>
           ))}
